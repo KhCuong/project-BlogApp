@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    align-items: center;
+    /* khoảng cách giữa các phần tử con */
+    justify-content: space-between;
+    height: 100px;
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* khoảng cách giữa logo và tiêu đề */
+}
+
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+
+}
+
+.logo {
+    width: 22px;
+    height: 22px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}

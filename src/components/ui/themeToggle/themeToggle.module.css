@@ -1,0 +1,27 @@
+.container {
+    cursor: pointer;
+    background-color: #000;
+    border-radius: 50px;
+    height: 25px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.ball {
+    background-color: #fff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+.light {
+    right: 0;
+}
+
+.dark {
+    left: 0;
+}
