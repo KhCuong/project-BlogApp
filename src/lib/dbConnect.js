@@ -1,26 +1,14 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+if (!process.env.DB_URL) throw new Error('Database URL is Missing');
+const url = process.env.DB_URL, connection = { isConnected: false };
 
-if (!MONGODB_URI) {
-    throw new Error('Vui lòng cấu hình MONGODB_URI trong .env');
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-    cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function dbConnect() {
-    if (cached.conn) return cached.conn;
-
-    if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI).then(mongoose => mongoose);
+export default async function connectDB() {
+    let db;
+    if (!connection.isConnected) {
+        db = await mongoose.connect(url);
+        connection.isConnected = db.connections[0].readyState;
+        if (process.env.NODE_ENV === 'development') console.info('Database is Connected');
     }
-
-    cached.conn = await cached.promise;
-    return cached.conn;
+    return db;
 }
-
-export default dbConnect;

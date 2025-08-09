@@ -7,7 +7,7 @@ export function login(email, password) {
 }
 
 export function signup(name, email, password) {
-    return fetch("/api/auth/signup", {
+    return fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),

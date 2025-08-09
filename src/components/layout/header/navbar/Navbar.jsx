@@ -17,7 +17,7 @@ const Navbar = () => {
                 <Link href="/">Home</Link>
                 <Link href="/about">About</Link>
                 <Link href="/contact">Contact</Link>
-                <Link href="/login">Đăng Nhập</Link>
+                <Link href="/signin">Đăng Nhập</Link>
             </div>
         </div>
     );
