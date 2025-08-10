@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "name": "sangam",
+    "email": "sangam@gmail.com",
+    "username": "sangam",
+    "password": "182003"
+  },
+  {
+    "name": "Khương Công Cường",
+    "email": "admin@gmail.com",
+    "username": "khngcngcng",
+    "password": "182003"
+  },
+  {
+    "name": "dang cong duc ",
+    "email": "khuongcuong36@gmail.com",
+    "username": "dangcongduc",
+    "password": "182003"
+  }
+]

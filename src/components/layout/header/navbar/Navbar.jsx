@@ -1,23 +1,30 @@
 
+import { useUser } from "../../../context/UserContext";
 import Link from "next/link";
-import styles from "./navbar.module.css";
 import ThemeToggle from "../../../ui/themeToggle/ThemeToggle";
-import LoginForm from "../../../auth/LoginForm";
+import UserDropdown from "../UserDropdown";
+import styles from "./navbar.module.css";
+
 const Navbar = () => {
+    const { user } = useUser();
+
     return (
         <div className={styles.container}>
-            <div className={styles.branding}>
+            <Link href="/" className={styles.branding}>
                 <div className={styles.logo}>
                     <img src="/globe.svg" alt="Logo" />
                 </div>
                 <div className={styles.title}>Blog App</div>
-            </div>
+            </Link>
             <div className={styles.links}>
                 <ThemeToggle />
-                <Link href="/">Home</Link>
-                <Link href="/about">About</Link>
-                <Link href="/contact">Contact</Link>
-                <Link href="/signin">Đăng Nhập</Link>
+                <Link href="/blog">Blog</Link>
+                {user && <Link href="/blog/create">Tạo bài viết</Link>}
+                {user ? (
+                    <UserDropdown user={user} />
+                ) : (
+                    <Link href="/signin">Sign In</Link>
+                )}
             </div>
         </div>
     );

@@ -1,14 +1,15 @@
 "use client"
-import styles from "./loginPage.module.css";
-import { SessionProvider } from "next-auth/react";
-import LoginForm from "../../../components/auth/LoginForm";
+
+import styles from "./signinPage.module.css";
+
+import LoginForm from "../../../components/auth/SigninForm";
 export default function LoginPage() {
     return (
-        <SessionProvider>
-            <main className={styles.container}>
-                <LoginForm />
-            </main>
-        </SessionProvider>
+
+        <main className={styles.container}>
+            <LoginForm />
+        </main>
+
     );
 }
 

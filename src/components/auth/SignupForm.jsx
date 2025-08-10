@@ -3,7 +3,6 @@
 
 import { REQ_CONFIG } from "../../constants/forms/formData";
 import { useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -20,7 +19,6 @@ export default function SignUpForm() {
     });
     const [err, setErr] = useState('');
     const [loaded, setLoaded] = useState(false);
-    const { status } = useSession();
     const router = useRouter();
 
     const updateField = fields => setSignupData({ ...signupData, ...fields });
@@ -46,11 +44,11 @@ export default function SignUpForm() {
         }
         setLoaded(true);
         try {
-            const res = await axios.post('/api/auth/signup', { signupData }, REQ_CONFIG);
+            const res = await axios.post('/api/auth/signup', { signupData });
             if (res?.status === 200) {
                 setLoaded(false);
-                await signIn(undefined, { callbackUrl: '/' });
                 setSignupData({ name: '', email: '', password: '', confirmPass: '' });
+                router.push('/login');
             }
         } catch (err) {
             setErr(err.response ? err.response.data.message : err.message);
@@ -58,7 +56,6 @@ export default function SignUpForm() {
         }
     };
 
-    if (status === 'authenticated') router.push('/');
 
     return (
         <div className={styles.formContainer}>

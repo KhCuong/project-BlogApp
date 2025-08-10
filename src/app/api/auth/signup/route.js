@@ -1,13 +1,9 @@
-// import { generate } from "../../../../constants/helpers";
-import connectDB from "../../../../lib/dbConnect";
-import bcrypt from "bcrypt";
-import User from "../../../../models/CredentialsUser";
-import { INITIAL_MISC_DATA } from "../../../../constants/forms/formData";
-import fs from 'fs';
 import path from 'path';
+// Đã loại bỏ database, chỉ dùng users.json
+import fs from 'fs';
 
-export default async function handler(req, res) {
-    if (req.method === 'POST') try {
+
+export async function POST(req) {
     try {
         const body = await req.json();
         const submitted = body.signupData;
@@ -24,8 +20,8 @@ export default async function handler(req, res) {
         let username = submitted.username && submitted.username.trim()
             ? submitted.username.trim()
             : submitted.name
-            ? submitted.name.toLowerCase().replace(/[^a-z0-9]/g, "")
-            : submitted.email.split("@")[0];
+                ? submitted.name.toLowerCase().replace(/[^a-z0-9]/g, "")
+                : submitted.email.split("@")[0];
         if (users.find(u => u.username === username)) {
             username = username + Math.floor(Math.random() * 10000);
         }
@@ -40,11 +36,5 @@ export default async function handler(req, res) {
         return Response.json({ message: 'Đăng ký thành công', user: newUser }, { status: 200 });
     } catch (err) {
         return Response.json({ status: 'error', message: err.message }, { status: 500 });
-    }
-    } catch (err) {
-        res.status(500).json({
-            status: 'error',
-            message: err.message
-        })
     }
 }
